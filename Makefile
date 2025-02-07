@@ -1,9 +1,9 @@
 COMPOSE = srcs/docker-compose.yml
 
-.PHONY: all
+.PHONY: all clean
 
-all:
-	docker-compose -f $(COMPOSE) up -d
+all: clean
+	docker-compose -f $(COMPOSE) up --build -d
 
-down:
+clean:
 	docker-compose -f $(COMPOSE) down

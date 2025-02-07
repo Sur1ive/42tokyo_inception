@@ -1,9 +1,20 @@
-version: "3.8"
-
 services:
   nginx:
     build:
       context: ./requirements/nginx
     ports:
       - "8443:443"
-    container_name: my-nginx
+    networks:
+      - docker-network
+    container_name: nginx
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    networks:
+      - docker-network
+    container_name: mariadb
+
+networks:
+  docker-network:
+    driver: bridge

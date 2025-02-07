@@ -7,9 +7,7 @@ RUN apk update && \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY server.crt /etc/nginx/ssl/server.crt
 COPY server.key /etc/nginx/ssl/server.key
-
-# RUN mkdir -p /var/www/html
-# COPY ./html /var/www/html
+COPY index.html /usr/share/nginx/html/index.html
 
 EXPOSE 443
 
