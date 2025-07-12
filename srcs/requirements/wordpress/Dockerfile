@@ -6,8 +6,6 @@ RUN apt-get update && \
 
 RUN sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
 
-RUN cp -r /usr/share/wordpress/* /var/www/html/
-
 RUN mkdir -p /run/php
 
 COPY entrypoint.sh /usr/local/bin/

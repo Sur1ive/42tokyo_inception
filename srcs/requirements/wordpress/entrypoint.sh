@@ -3,6 +3,7 @@ set -euo pipefail
 
 CONFIG_FILE=/etc/wordpress/config-localhost.php
 
+cp -r /usr/share/wordpress/* /var/www/html/
 cp /var/www/html/wp-config-sample.php ${CONFIG_FILE}
 
 sed -i "s/database_name_here/${WORDPRESS_DB_NAME}/" ${CONFIG_FILE}
