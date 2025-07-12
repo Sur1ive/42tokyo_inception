@@ -11,6 +11,7 @@ services:
     container_name: nginx
     volumes:
       - wordpress-data:/var/www/html
+    restart: unless-stopped
 
   mariadb:
     build:
@@ -19,12 +20,12 @@ services:
       - docker-network
     container_name: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mariadb-data:/var/lib/mysql
+    restart: unless-stopped
 
   wordpress:
     build:
@@ -41,6 +42,7 @@ services:
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
     volumes:
       - wordpress-data:/var/www/html
+    restart: unless-stopped
 
 networks:
   docker-network:
