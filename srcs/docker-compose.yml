@@ -6,7 +6,11 @@ services:
       - "8443:443"
     networks:
       - docker-network
+    depends_on:
+      - wordpress
     container_name: nginx
+    volumes:
+      - wordpress-data:/var/www/html
 
   mariadb:
     build:
@@ -19,19 +23,31 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mariadb-data:/var/lib/mysql
 
   wordpress:
     build:
       context: ./requirements/wordpress
     networks:
       - docker-network
+    depends_on:
+      - mariadb
     container_name: wordpress
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
+    volumes:
+      - wordpress-data:/var/www/html
 
 networks:
   docker-network:
     driver: bridge
+
+volumes:
+  wordpress-data:
+    driver: local
+  mariadb-data:
+    driver: local
