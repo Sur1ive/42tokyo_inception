@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+mysql_install_db
+
 if [ ! -d /var/lib/mysql/${MYSQL_DATABASE} ]; then
   mysqld &
 

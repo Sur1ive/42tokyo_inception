@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-CONFIG_FILE=/etc/wordpress/config-localhost.php
+CONFIG_FILE=/etc/wordpress/config-default.php
 
 cp -r /usr/share/wordpress/* /var/www/html/
 cp /var/www/html/wp-config-sample.php ${CONFIG_FILE}
