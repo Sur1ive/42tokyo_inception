@@ -10,6 +10,8 @@ services:
       - wordpress
     container_name: nginx
     image: yxu/nginx:1
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
     volumes:
       - ~/data/wordpress:/var/www/html
     restart: unless-stopped
@@ -39,10 +41,13 @@ services:
     container_name: wordpress
     image: yxu/wordpress:1
     environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
+      - WP_ADMIN_PASSWD=${WP_ADMIN_PASSWD}
+      - WP_USER_PASSWD=${WP_USER_PASSWD}
     volumes:
       - ~/data/wordpress:/var/www/html
     restart: unless-stopped

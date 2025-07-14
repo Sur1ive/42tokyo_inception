@@ -1,9 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-mysql_install_db
-
 if [ ! -d /var/lib/mysql/${MYSQL_DATABASE} ]; then
+  mysql_install_db
   mysqld &
 
   for i in {0..10}; do
