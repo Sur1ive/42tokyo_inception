@@ -28,7 +28,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ~/data/mariadb:/var/lib/mysql
+      - db_data:/var/lib/mysql
     restart: unless-stopped
 
   wordpress:
@@ -55,3 +55,6 @@ services:
 networks:
   docker-network:
     driver: bridge
+
+volumes:
+  db_data:

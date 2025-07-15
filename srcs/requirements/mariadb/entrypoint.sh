@@ -1,5 +1,5 @@
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh
+set -e
 
 if [ ! -d /var/lib/mysql/${MYSQL_DATABASE} ]; then
   mysql_install_db

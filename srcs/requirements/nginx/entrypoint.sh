@@ -1,6 +1,6 @@
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh
+set -e
 
-envsubst '${DOMAIN_NAME}' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf
+envsubst '${DOMAIN_NAME}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 exec "$@"
