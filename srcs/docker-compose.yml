@@ -46,8 +46,12 @@ services:
       - WORDPRESS_DB_USER=${MYSQL_USER}
       - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
+      - WP_ADMIN_USERNAME=${WP_ADMIN_USERNAME}
       - WP_ADMIN_PASSWD=${WP_ADMIN_PASSWD}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - WP_USER_USERNAME=${WP_USER_USERNAME}
       - WP_USER_PASSWD=${WP_USER_PASSWD}
+      - WP_USER_EMAIL=${WP_USER_EMAIL}
     volumes:
       - ~/data/wordpress:/var/www/html
     restart: unless-stopped

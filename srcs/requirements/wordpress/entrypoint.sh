@@ -15,10 +15,10 @@ done
 echo "Database is ready. Try to install WordPress and create users if needed."
 
 wp core install --path=/var/www/html --url=https://${DOMAIN_NAME} \
-    --admin_user=yxu --admin_password=${WP_ADMIN_PASSWD} --title=${DOMAIN_NAME} \
-    --admin_email=yxu@test.com --allow-root || true
+    --admin_user=${WP_ADMIN_USERNAME} --admin_password=${WP_ADMIN_PASSWD} --title=${DOMAIN_NAME} \
+    --admin_email=${WP_ADMIN_EMAIL} --allow-root || true
 
-wp user create test_user test@test.com --path=/var/www/html --role=editor \
+wp user create ${WP_USER_USERNAME} ${WP_USER_EMAIL} --path=/var/www/html --role=editor \
     --user_pass=${WP_USER_PASSWD} --allow-root || true
 
 exec "$@"
