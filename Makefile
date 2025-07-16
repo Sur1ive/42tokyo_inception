@@ -10,6 +10,6 @@ up:
 	docker-compose -f $(COMPOSE) up --build -d
 
 down:
-	docker-compose -f $(COMPOSE) down
+	docker-compose -f $(COMPOSE) down -v
 
 re: down up

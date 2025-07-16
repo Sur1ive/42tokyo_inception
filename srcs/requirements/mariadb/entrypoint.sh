@@ -1,23 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 if [ ! -d /var/lib/mysql/${MYSQL_DATABASE} ]; then
-  mysql_install_db
+  mysql_install_db || true
   mysqld &
 
-  for i in {0..10}; do
-    if mysqladmin ping &> /dev/null; then
-      break
-    fi
-    echo 'MariaDB starting...' "$i"
+  while ! mysqladmin ping &> /dev/null; do
+    echo 'Waiting for MariaDB to start...'
     sleep 1
   done
 
-  if [ "$i" = 10 ]; then
-    echo >&2 'MariaDB startup failed.'
-    exit 1
-  fi
-
+  echo "Initializing the database."
   envsubst < /tmp/init.sql | mysql -u root
   mysqladmin -u root shutdown
 fi
