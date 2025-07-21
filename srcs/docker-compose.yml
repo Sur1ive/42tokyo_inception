@@ -13,7 +13,7 @@ services:
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
     volumes:
-      - ~/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     restart: unless-stopped
 
   mariadb:
@@ -28,7 +28,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - ~/data/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     restart: unless-stopped
 
   wordpress:
@@ -53,9 +53,23 @@ services:
       - WP_USER_PASSWD=${WP_USER_PASSWD}
       - WP_USER_EMAIL=${WP_USER_EMAIL}
     volumes:
-      - ~/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     restart: unless-stopped
 
 networks:
   docker-network:
     driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/yxu/data/mariadb
+      o: bind
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/yxu/data/wordpress
+      o: bind
